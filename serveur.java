@@ -1,53 +1,59 @@
-
 package files;
 
 import org.omg.CORBA.*;
-import org.omg.CosNaming.*;
-import org.omg.CosNaming.NamingContextPackage.*;
+
 import org.omg.PortableServer.*;
 
-import java.util.*;
 import java.io.*;
+
 import java.lang.*;
 
+import java.util.*;
+
+
 public class serveur {
-	public static void main(String args[]) throws IOException { 
-		try {
-			ORB orb = ORB.init(args, null);
-			POA poa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
-			poa.the_POAManager().activate();
-			
-			directoryImpl dir = new directoryImpl(poa);
-			org.omg.CORBA.Object ref = poa.servant_to_reference(dir);
-			
-			org.omg.CORBA.Object obj = null;
-			obj = orb.resolve_initial_references("NameService");
-			if(obj == null){
-				System.out.println("Reference null sur NameService");
-				System.exit(1);
-			}
-			
+    public static void main(String[] args) throws IOException {
+        ////////////////////////////////////////
+        // Initialisation de l'ORB et de la POA 
+        ////////////////////////////////////////
+        try {
+            //init ORB
+            ORB orb = ORB.init(args, null);
 
-			System.out.println("Le serveur est pret ");
-			orb.run();
-      
-  
-			System.exit(0);
-		}
-		catch(org.omg.CORBA.ORBPackage.InvalidName ex){
-			System.out.println("org.omg.CORBA.ORBPackage.InvalidName sur orb.resolve_initial_references");
-			System.exit(1);
-		}
-		catch(org.omg.PortableServer.POAManagerPackage.AdapterInactive ex){
-			System.out.println("org.omg.PortableServer.POAManagerPackage.AdapterInactive sur activate() ");
-			System.exit(1);
-		}
-		catch(Exception e){
-			System.out.println(e);
-		}
-		
+            //init POA
+            POA poa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+            poa.the_POAManager().activate();
 
-	}
+            ////////////////////////////////////////////////////////////////
+            // Instantiation de l'objet : creation de 
+            //	l'implantation de l'objet
+            ////////////////////////////////////////////////////////////////
+            directoryImpl dir = new directoryImpl(poa);
 
+            // create the object reference
+            org.omg.CORBA.Object dirRef = poa.servant_to_reference(dir);
+
+            try {
+                String calc_ref = orb.object_to_string(dirRef);
+                String refFile = "dir.ref";
+                PrintWriter out = new PrintWriter(new FileOutputStream(refFile));
+                out.println(calc_ref);
+                out.close();
+            } catch (IOException ex) {
+                System.err.println(
+                    "Impossible d'ecrire la reference dans dir.ref");
+                System.exit(1);
+            }
+
+            System.out.println("Le serveur est pret ");
+
+            // wait for requests
+            orb.run();
+
+            System.exit(0);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
-
