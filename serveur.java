@@ -2,8 +2,15 @@
 package files;
 
 import org.omg.CORBA.*;
+import org.omg.CosNaming.*;
+import org.omg.CosNaming.NamingContextPackage.*;
+import org.omg.PortableServer.*;
 
-public class Serveur {
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+public class serveur {
 	public static void main(String args[]) throws IOException { 
 		try {
 			ORB orb = ORB.init(args, null);
@@ -42,6 +49,16 @@ public class Serveur {
   
 			System.exit(0);*/
 		}
+				catch(org.omg.CORBA.ORBPackage.InvalidName ex)
+				{
+				System.out.println("org.omg.CORBA.ORBPackage.InvalidName sur orb.resolve_initial_references");
+				System.exit(1);
+				}
+		catch(org.omg.PortableServer.POAManagerPackage.AdapterInactive ex)
+				{
+				System.out.println("org.omg.PortableServer.POAManagerPackage.AdapterInactive sur activate() ");
+				System.exit(1);
+				}
 
 	}
 
