@@ -29,6 +29,12 @@ classes/$(MODULE)/%.class : %.java
 
 ####
 
+serveur:
+	jaco files.serveur
+	
+client:
+	jaco files.client
+
 clean::
 	rm -rf core *.jacorb *.ref 
 	rm -rf classes generated
