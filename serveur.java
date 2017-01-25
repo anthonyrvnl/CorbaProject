@@ -49,16 +49,14 @@ public class serveur {
   
 			System.exit(0);*/
 		}
-				catch(org.omg.CORBA.ORBPackage.InvalidName ex)
-				{
-				System.out.println("org.omg.CORBA.ORBPackage.InvalidName sur orb.resolve_initial_references");
-				System.exit(1);
-				}
-		catch(org.omg.PortableServer.POAManagerPackage.AdapterInactive ex)
-				{
-				System.out.println("org.omg.PortableServer.POAManagerPackage.AdapterInactive sur activate() ");
-				System.exit(1);
-				}
+		catch(org.omg.CORBA.ORBPackage.InvalidName ex){
+			System.out.println("org.omg.CORBA.ORBPackage.InvalidName sur orb.resolve_initial_references");
+			System.exit(1);
+		}
+		catch(org.omg.PortableServer.POAManagerPackage.AdapterInactive ex){
+			System.out.println("org.omg.PortableServer.POAManagerPackage.AdapterInactive sur activate() ");
+			System.exit(1);
+		}
 
 	}
 
