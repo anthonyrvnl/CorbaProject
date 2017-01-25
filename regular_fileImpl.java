@@ -19,7 +19,12 @@ public class regular_fileImpl extends regular_filePOA{
 	}
 
 	public int read(int size, StringHolder data) throws end_of_file, invalid_operation{
-		if(size >= size_of_file) throw new end_of_file();
+		for(int i = this.offset; i < this.offset + size; i++){
+			if(this.offset > this.size_of_file) throw new end_of_file();
+			else{
+				
+			}
+		}
 
 		return 0;
 	}
@@ -29,11 +34,12 @@ public class regular_fileImpl extends regular_filePOA{
 	}
 
 	public void seek(int new_offset) throws invalid_offset, invalid_operation{
-
+		if(new_offset < 0 || new_offset > this.size_of_file) throw new invalid_offset();
+		else this.offset = new_offset;
 	}
 
 	public void close(){
-
+		
 	}
 
 }
