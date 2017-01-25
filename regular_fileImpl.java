@@ -2,11 +2,6 @@ package files;
 import org.omg.CORBA.*;
 import org.omg.PortableServer.*;
 
-/*
- * 
- * test
- * 
- * */
 public class regular_fileImpl extends regular_filePOA{
 	
 	POA _poa;

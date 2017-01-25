@@ -1,22 +1,15 @@
 
-
 MODULE = files
-JAVA = regular_fileImpl.java directoryImpl.java file_listImpl.java mode.java directory_entry.java
-#JAVA  = etudiantImpl.java Client.java Serveur.java Client_contexte.java Serveur_contexte.java
+JAVA = regular_fileImpl.java directoryImpl.java file_listImpl.java mode.java directory_entry.java serveur.java client.java
 IDL   = files.idl
 
 CLASS = $(JAVA:%.java=classes/$(MODULE)/%.class) 
 
-
 all: idl src
-
 
 src:	subdir $(CLASS)
 idl:	subdir $(IDL:.idl=.jacorb)
 	
-
-
-
 ############################################
 ## Do not change anything after this line
 ############################################
