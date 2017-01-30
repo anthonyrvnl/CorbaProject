@@ -1,6 +1,7 @@
 package files;
 import org.omg.CORBA.*;
 import org.omg.PortableServer.*;
+import java.io.*;
 
 public class regular_fileImpl extends regular_filePOA{
 
@@ -16,6 +17,12 @@ public class regular_fileImpl extends regular_filePOA{
 		this.offset = 0;
 		this.size_of_file = 0;
 		this.data_file = "";
+		try {
+			new FileOutputStream(name,true);
+		} catch (IOException ex) {
+			System.err.println("--Error creating file--");
+			System.exit(1);
+		}
 	}
 
 	public int read(int size, StringHolder data) throws end_of_file, invalid_operation{

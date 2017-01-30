@@ -29,6 +29,7 @@ public class serveur {
 			//	l'implantation de l'objet
 			////////////////////////////////////////////////////////////////
 			directoryImpl dir = new directoryImpl(poa);
+			regular_fileImpl fil = new regular_fileImpl(poa, "toto");
 
 			// create the object reference
 			org.omg.CORBA.Object dirRef = poa.servant_to_reference(dir);
