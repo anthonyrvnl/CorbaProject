@@ -1,6 +1,6 @@
 
 MODULE = files
-JAVA = regular_fileImpl.java directoryImpl.java file_listImpl.java mode.java directory_entry.java serveur.java client.java
+JAVA = regular_fileImpl.java directoryImpl.java file_listImpl.java mode.java serveur.java client.java
 IDL   = files.idl
 
 CLASS = $(JAVA:%.java=classes/$(MODULE)/%.class) 
@@ -48,5 +48,3 @@ subdir:
 	if [ ! -d generated ]; then \
 	   mkdir generated;  \
 	fi;
-
-

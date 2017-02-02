@@ -1,13 +1,10 @@
 module files {
-
-
 	exception no_such_file {};
 	exception end_of_file {};
 	exception invalid_offset {};
 	exception invalid_type_file {};
 	exception invalid_operation{};
 	exception already_exist {};
-
 
 	interface regular_file {
 
@@ -23,7 +20,6 @@ module files {
 		void close();
 	};
 
-
 	enum mode {read_only, write_append, write_trunc, read_write};
 	enum file_type {regular_file_type, directory_type};
 
@@ -32,11 +28,9 @@ module files {
 		file_type type;
 	};
 
-
 	interface file_list {
 		boolean next_one(inout directory_entry e);
 	};
-
 
 	interface directory;
 	interface directory {
